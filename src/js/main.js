@@ -12,8 +12,14 @@ const taskTitle = input.value;
 if (taskTitle === "") return;
 const task = document.createElement('li');
 task.className = 'task';
-task.innerHTML = taskTitle + "<button> Usuń</button>";
+task.innerHTML = taskTitle + `<button class="removeButton"> Usuń</button>`;
 ul.appendChild(task);
+input.value = "";
+task.querySelector('.removeButton').addEventListener('click', removeTask);
+}
+
+const removeTask = (e) => {
+e.target.parentNode.remove();
 }
 
 addButton.addEventListener('click',addTask) 
