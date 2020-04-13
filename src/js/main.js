@@ -12,18 +12,20 @@ const task = document.createElement('li');
 const start = (e) => {
   if (!localStorage.getItem('task')) {
     task.innerHTML = "";
-    // localStorage.setItem('task', input.value);
+    taskCounter.innerHTML = 0;
   } else {
     task.innerHTML = localStorage.getItem('task') + `<button class="removeButton">Usuń</button>`;
     task.className = 'task';
     ul.appendChild(task);
     task.querySelector('.removeButton').addEventListener('click', removeTask);
+    taskCounter.innerHTML = listItems.length;
   }
 }
 
 const removeTask = (e) => {
   e.target.parentNode.remove();
   localStorage.removeItem("task")
+  taskCounter.innerHTML = listItems.length;
 }
 
 
@@ -33,19 +35,12 @@ const addTask = (e) => {
   task.className = 'task';
   localStorage.setItem('task', input.value)
   task.innerHTML = localStorage.getItem('task') + `<button class="removeButton">Usuń</button>`;
-  // taskCounter.innerHTML = localStorage.getItem('task')
   input.value = "";
   ul.appendChild(task);
+  taskCounter.innerHTML = listItems.length;
   task.querySelector('.removeButton').addEventListener('click', removeTask);
 
-  // taskCounter.innerHTML = listItems.length;
 }
 
 start();
 addButton.addEventListener('click', addTask)
-
-
-
-
-// const taskTitle = input.value;
-// if (taskTitle === "") return;
