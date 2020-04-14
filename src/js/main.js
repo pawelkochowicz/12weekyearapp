@@ -7,19 +7,23 @@ const taskCounter = document.querySelector('.taskCounter');
 const input = document.querySelector('.taskInput');
 let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
+
+// const removeTask = (e) => {
+//   e.target.parentNode.remove();
+//   localStorage.removeItem("task")
+// }
+
 localStorage.setItem('items', JSON.stringify(itemsArray));
 const data = JSON.parse(localStorage.getItem('items'));
 
 const task = (text) => {
   const li = document.createElement('li');
-  li.textContent = text;
+  li.innerHTML = ((text) + (`<button class="removeTask">Usuń</button>`));
   ul.appendChild(li);
+  // task.querySelector('.removeTask').addEventListener('click', removeTask)
 }
-// const removeTask = (e) => {
-//   e.target.parentNode.remove();
-//   localStorage.removeItem("task")
-//   taskCounter.innerHTML = listItems.length;
-// }
+
+
 
 
 form.addEventListener('submit', function (e) {
@@ -31,7 +35,7 @@ form.addEventListener('submit', function (e) {
 })
 
 data.forEach(item => {
-  task(item)
+  task(item);
 });
 
 
