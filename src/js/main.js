@@ -5,21 +5,16 @@ const ul = document.querySelector('.taskList');
 const addButton = document.querySelector('.addTaskButton');
 const taskCounter = document.querySelector('.taskCounter');
 const input = document.querySelector('.taskInput');
-let itemsArray = [];
+let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
-// const start = (e) => {
-//   if (!localStorage.getItem('task')) {
-//     task.innerHTML = "";
-//     taskCounter.innerHTML = 0;
-//   } else {
-//     task.innerHTML = localStorage.getItem('task') + `<button class="removeButton">Usuń</button>`;
-//     task.className = 'task';
-//     ul.appendChild(task);
-//     task.querySelector('.removeButton').addEventListener('click', removeTask);
-//     taskCounter.innerHTML = listItems.length;
-//   }
-// }
+localStorage.setItem('items', JSON.stringify(itemsArray));
+const data = JSON.parse(localStorage.getItem('items'));
 
+const task = (text) => {
+  const li = document.createElement('li');
+  li.textContent = text;
+  ul.appendChild(li);
+}
 // const removeTask = (e) => {
 //   e.target.parentNode.remove();
 //   localStorage.removeItem("task")
@@ -27,23 +22,18 @@ let itemsArray = [];
 // }
 
 
-const addTask = (e) => {
+form.addEventListener('submit', function (e) {
   e.preventDefault();
-  if (input.value === "") return;
-  const task = (text) => {
-    const li = document.createElement('li');
-    li.textContent = text;
-    ul.appendChild(li);
-  }
   itemsArray.push(input.value);
   localStorage.setItem('items', JSON.stringify(itemsArray));
-  const data = JSON.parse(localStorage.getItem('items'));
   task(input.value);
   input.value = "";
-}
+})
 
-// start();
-form.addEventListener('submit', addTask)
+data.forEach(item => {
+  task(item)
+});
+
 
 
 
